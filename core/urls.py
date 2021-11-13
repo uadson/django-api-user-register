@@ -4,5 +4,5 @@ from . import views
 app_name = 'core'
 
 urlpatterns = [
-    path('', views.json_view, name='json_view'),
+    path('data/', views.json_view, name='json_view'),
 ]
