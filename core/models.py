@@ -24,13 +24,12 @@ class Base(models.Model):
 class Client(Base):
     """Model Client
         user, email, birth date and password
-        
+
         * password is not mandatory but when no value is entered, a random password will be generated.
     """
-    user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="User")
     email = models.EmailField(max_length=150, verbose_name="Email")
     birth_date = models.DateField(default=timezone.now)
-    password = models.CharField(max_length=20, verbose_name="Senha", blank=True)
+    password = models.CharField(max_length=36, verbose_name="Senha", blank=True)
 
     class Meta:
         ordering = ('-email',)
@@ -42,14 +41,13 @@ class Client(Base):
 
     def save(self, *args, **kwargs):
         if self.password == '':
-            self.password = f"{uuid.uuid4}"
+            self.password = str(uuid.uuid1())
         super().save(*args, **kwargs)
 
     def to_dict_json(self):
         return {
-            'pk':self.pk,
-            'user':self.user,
-            'email':self.email,
+            'pk': self.pk,
+            'email': self.email,
             'birth_date': self.birth_date,
             'password': self.password,
-        }        
+        }
