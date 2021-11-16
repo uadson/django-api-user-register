@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # local app
     'core',
+
+    # 3rd
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "core.User"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
